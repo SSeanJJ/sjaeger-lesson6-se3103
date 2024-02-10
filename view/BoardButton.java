@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -13,7 +14,7 @@ public class BoardButton extends JButton {
     public BoardButton(int pos) {
         this.pos = pos;
         setFont(new Font("Courier New", Font.BOLD, 84));
-        setForeground(getBackground());
+        setForeground(Color.BLUE);
         setMark(Marking.U);
     }
 

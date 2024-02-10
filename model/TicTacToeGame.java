@@ -7,7 +7,7 @@ public class TicTacToeGame {
     private int moves = 0;
     private Marking winner = null;
     private GameState state = GameState.INIT;
-    private PlayStrategy strategy = PlayStrategy.VsHuman;
+    private PlayStrategy strategy = PlayStrategy.VsComputer;
 
     public TicTacToeGame() {
         reset();
@@ -27,13 +27,44 @@ public class TicTacToeGame {
         turn = (turn == Marking.X) ? Marking.O : Marking.X;
      }
 
+     public Marking getTurn() {
+         return turn;
+     }
+
     public void play(int position) {
         if (strategy == PlayStrategy.VsHuman) {
             humanPlayer(position);
             setWinner();
         } else if (strategy == PlayStrategy.VsComputer) {
-            // computer player 
+           humanPlayer(position);
+           setWinner();
+           if(getWinner() != null) return;
+           changeTurns();
+           computerPlayer();
+           setWinner();
         }
+    }
+
+    public Marking getWinner(){
+        return winner;
+    }
+
+    public void computerPlayer(){
+        int pos = computerPick();
+        board[pos] = turn;
+        ++moves;
+    }
+
+    private int computerPick() {
+        int pos = -1;
+        for(int i =0; i < board.length; i++) {
+            if (board[i] == Marking.U) {
+                pos = i;
+                break;
+            }
+        }
+        assert pos >= 0 : "Invalid Position from ComputerPick()";
+        return pos;
     }
 
     private void humanPlayer(int pos) {
@@ -101,6 +132,27 @@ public class TicTacToeGame {
     return null;
 }
   }
+
+  public GameState getState() {
+    return state;
+  }
+
+  public void setState(GameState state) {
+    this.state = state;
+  }
+
+  public PlayStrategy getStrategy() {
+    return strategy;
+  }
+
+  public void setStrategy(PlayStrategy strategy) {
+      this.strategy = strategy;
+  }
+
+  public Marking[] getBoard() {
+    return board;
+  }
+
 
   @Override
   public String toString() { 

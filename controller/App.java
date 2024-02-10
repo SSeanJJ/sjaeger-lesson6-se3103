@@ -13,7 +13,7 @@ public class App {
     public static void main(String[] args) {
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         win.init();
-        win.setLocation(300,200); 
+        win.setLocation(300,200);  
 
         win.pack();
         win.setVisible(true);
